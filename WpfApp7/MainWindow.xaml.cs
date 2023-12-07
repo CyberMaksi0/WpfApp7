@@ -20,8 +20,17 @@ namespace WpfApp7
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
         }
 
+        public static readonly DependencyProperty TextBoxTextProperty =
+            DependencyProperty.Register("TextBoxText", typeof(string), typeof(MainWindow));
+
+        public string TextBoxText
+        {
+            get { return (string)GetValue(TextBoxTextProperty); }
+            set { SetValue(TextBoxTextProperty, value); }
+        }
         private void OnLabelMouseEnter(object sender, MouseEventArgs e)
         {
 
@@ -31,11 +40,6 @@ namespace WpfApp7
         {
 
         }
-        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            label.Content = textBox.Text;
-        }
-
         private void CMO_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (CMO.SelectedItem != null)
@@ -46,22 +50,50 @@ namespace WpfApp7
         private void OnToggleButtonChecked(object sender, RoutedEventArgs e)
         {
             popup.IsOpen = true;
+            toggleButton.Content = "Ukryj Popup";
         }
 
         private void OnToggleButtonUnchecked(object sender, RoutedEventArgs e)
         {
             popup.IsOpen = false;
+            toggleButton.Content = "Pokaż Popup";
         }
-
-        private void xD_Checked(object sender, RoutedEventArgs e)
+        private void RadioButtonOther_Checked(object sender, RoutedEventArgs e)
         {
-            if((bool)xD.IsChecked)
+            otherTextBox.Visibility = Visibility.Visible;
+        }
+        private void RadioButtonOther_Unchecked(object sender, RoutedEventArgs e)
+        {
+            otherTextBox.Visibility = Visibility.Collapsed;
+        }
+        private void TextBox_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is TextBox textBox)
             {
-                Dx.Visibility = Visibility.Visible;
+                textBox.Foreground = Brushes.Red;
+                textBox.FontSize = FontSize + 3;
             }
-            else
+        }
+        private void TextBox_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is TextBox textBox)
             {
-                Dx.Visibility = Visibility.Hidden;
+                textBox.Foreground = Brushes.Black;
+                textBox.FontSize = FontSize - 3;
+            }
+        }
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ListBox listBox && listBox.SelectedItem is ListBoxItem selectedItem)
+            {
+                foreach (var item in listBox.Items)
+                {
+                    if (item is ListBoxItem listBoxItem)
+                    {
+                        listBoxItem.Foreground = Brushes.Black;
+                    }
+                }
+                selectedItem.Foreground = Brushes.Cyan;
             }
         }
     }

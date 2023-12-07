@@ -24,18 +24,18 @@
         <Grid Background="MediumVioletRed" Grid.Row="1" Grid.Column="0"></Grid>
         <Grid Background="MediumOrchid" Grid.Row="1" Grid.Column="1"></Grid>
         <Grid Background="MediumSeaGreen" Grid.Row="1" Grid.Column="2"></Grid>
-        <TextBox x:Name="textBox" Grid.Column="0" Grid.Row="0" Height="30" VerticalAlignment="Top" Width="180" Margin="10" TextChanged="textBox_TextChanged"></TextBox>
-        <Label x:Name="label" Content="" Background="White" Grid.Column="0" Grid.Row="0" Height="30" VerticalAlignment="Center" Width="180" Margin="10"></Label>
-        <TextBox Grid.Column="2" Grid.Row="0" Height="30" VerticalAlignment="Top" Width="180" Margin="10" TextChanged="textBox_TextChanged"></TextBox>
-        <TextBox Grid.Column="2" Grid.Row="0" Height="30" VerticalAlignment="Center" Width="180" Margin="10"></TextBox>
-        <TextBox Grid.Column="2" Grid.Row="0" Height="30" VerticalAlignment="Bottom" Width="180" Margin="10"></TextBox>
-        <GroupBox Grid.Column="1" Grid.Row="1" Margin="10" VerticalAlignment="Top" Height="120" Header="Ile dziennie się uczysz?">
+        <TextBox x:Name="textBox" Foreground="Blue" Grid.Column="0" Grid.Row="0" Height="30" VerticalAlignment="Top" Width="180" Margin="10" Text="{Binding TextBoxText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <Label Content="{Binding TextBoxText}" Background="LightBlue" Foreground="Violet" Grid.Column="0" Grid.Row="0" Height="30" VerticalAlignment="Center" Width="180" Margin="10"></Label>
+        <TextBox Grid.Column="2" VerticalAlignment="Top" Margin="10" Grid.Row="0" x:Name="textBox1" Foreground="LightBlue" Width="180" Height="30" MouseEnter="TextBox_MouseEnter" MouseLeave="TextBox_MouseLeave"/>
+        <TextBox Grid.Column="2" VerticalAlignment="Center" Margin="10" Grid.Row="0" x:Name="textBox2" Foreground="LightBlue" Width="180" Height="30" MouseEnter="TextBox_MouseEnter" MouseLeave="TextBox_MouseLeave"/>
+        <TextBox Grid.Column="2" VerticalAlignment="Bottom" Margin="10" Grid.Row="0" x:Name="textBox3" Foreground="LightBlue" Width="180" Height="30" MouseEnter="TextBox_MouseEnter" MouseLeave="TextBox_MouseLeave"/>
+        <GroupBox x:Name="groupBox" Grid.Column="1" Grid.Row="1" Margin="10" VerticalAlignment="Top" Height="120" Header="Ile dziennie się uczysz?">
             <StackPanel>
-                <RadioButton>Mniej niż 2h</RadioButton>
-                <RadioButton>Między 2h a 5h</RadioButton>
-                <RadioButton>Ponad 5h</RadioButton>
-                <RadioButton x:Name="xD" Checked="xD_Checked">Inna odpowiedź</RadioButton>
-                <TextBox x:Name="Dx" Visibility="hidden" VerticalAlignment="Bottom"></TextBox>
+                <RadioButton x:Name="MniejNiz" Content="Mniej niż 2h" IsChecked="True"/>
+                <RadioButton x:Name="Miedzy" Content="Między 2 a 5h"/>
+                <RadioButton x:Name="WiecejNiz" Content="Więcej niż 5h"/>
+                <RadioButton x:Name="Inne" Content="Inna odpowiedź" Checked="RadioButtonOther_Checked" Unchecked="RadioButtonOther_Unchecked"/>
+                <TextBox x:Name="otherTextBox" Foreground="Violet" Margin="10" Visibility="Collapsed"/>
             </StackPanel>
         </GroupBox>
         <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -64,7 +64,7 @@
                 </Label.Style>
             </Label>
         </StackPanel>
-        <ComboBox IsEditable="True" x:Name="CMO" Grid.Column="2" Grid.Row="1" Width="180" Height="30" VerticalAlignment="Top" Margin="10" SelectionChanged="CMO_SelectionChanged">
+        <ComboBox Foreground="Violet" IsEditable="True" x:Name="CMO" Grid.Column="2" Grid.Row="1" Width="180" Height="30" VerticalAlignment="Top" Margin="10" SelectionChanged="CMO_SelectionChanged">
             <ComboBoxItem>Jeden</ComboBoxItem>
             <ComboBoxItem>Dwa</ComboBoxItem>
             <ComboBoxItem>Trzy</ComboBoxItem>
@@ -76,16 +76,16 @@
             <ComboBoxItem>Dziewięć</ComboBoxItem>
             <ComboBoxItem>Dziesięć</ComboBoxItem>
         </ComboBox>
-        <Label x:Name="label1" Content="" Background="White" Grid.Column="2" Grid.Row="1" Height="30" VerticalAlignment="Center" Width="180" Margin="10"></Label>
+        <Label Foreground="Violet" x:Name="label1" Content="" Background="White" Grid.Column="2" Grid.Row="1" Height="30" VerticalAlignment="Center" Width="180" Margin="10"></Label>
         <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Width="180" Height="30" Margin="10" Grid.Column="1" Grid.Row="0">
-            <ToggleButton x:Name="toggleButton" Content="Pokaż Popup" Checked="OnToggleButtonChecked" Unchecked="OnToggleButtonUnchecked"/>
+            <ToggleButton x:Name="toggleButton" Background="LightBlue" Foreground="Blue" FontSize="16" Content="Pokaż Popup" Checked="OnToggleButtonChecked" Unchecked="OnToggleButtonUnchecked"/>
             <Popup x:Name="popup" Width="180" Height="100" PlacementTarget="{Binding ElementName=toggleButton}" StaysOpen="False" Placement="Bottom">
                 <Border Background="LightGray" BorderBrush="Black" BorderThickness="1" Padding="10">
-                    <TextBlock Text="ToggleButton i Popup"/>
+                    <TextBlock Background="LightBlue" Foreground="Violet" Text="ToggleButton i Popup"/>
                 </Border>
             </Popup>
         </StackPanel>
-        <ListBox FontSize="22" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Background="PaleGreen">
+        <ListBox FontSize="22" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Background="PaleGreen"  SelectionChanged="ListBox_SelectionChanged">
             <ListBoxItem>Ania Bierze Tren</ListBoxItem>
             <ListBoxItem>Ania Bierze Tren</ListBoxItem>
             <ListBoxItem>Ania Bierze Tren</ListBoxItem>
